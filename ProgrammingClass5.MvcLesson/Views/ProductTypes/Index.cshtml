@@ -1,6 +1,10 @@
 ﻿@model List<ProductType>
 
 <div>
+    <a asp-controller="ProductTypes" asp-action="Create" class="btn btn-primary">
+        Create ProductType
+    </a>
+        
     <table class="table">
         <thead>
             <tr>
@@ -21,6 +25,11 @@
                     <td>@productType.Description</td>
                     <td>@productType.UnitPrice</td>
                     <td>@productType.Quantity</td>
+                    <td>
+                        <a asp-controller="ProductTypes" asp-action="Edit" asp-route-id="@productType.Id" class="btn btn-secondary">
+                            Edit
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>

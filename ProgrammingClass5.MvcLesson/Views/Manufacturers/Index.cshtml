@@ -1,6 +1,9 @@
 ﻿@model List<Manufacturer>
 
 <div>
+    <a asp-controller="Manufacturers" asp-action="Create" class="btn btn-primary">
+        Create Manufacturer
+    </a>
     <table class="table">
         <thead>
             <tr>
@@ -21,6 +24,11 @@
                     <td>@manufacturer.Country</td>
                     <td>@manufacturer.EstablishedYear</td>
                     <td>@manufacturer.Website</td>
+                    <td>
+                        <a asp-controller="Manufacturers" asp-action="Edit" asp-route-id="@manufacturer.Id" class="btn btn-secondary">
+                            Edit
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>

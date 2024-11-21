@@ -1,0 +1,44 @@
+﻿@model Manufacturer
+
+
+<div>
+    <h1>
+        Create Manufacturer
+    </h1>
+
+    <form asp-controller="Manufacturers" asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Country" class="form-label"></label>
+            <input asp-for="Country" class="form-control" />
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="EstablishedYear" class="form-label">Established Year</label>
+            <input asp-for="EstablishedYear" class="form-control" />
+            <span asp-validation-for="EstablishedYear" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Website" class="form-label"></label>
+            <textarea asp-for="Website" rows="5" class="form-control"></textarea>
+            <span asp-validation-for="Website" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <a asp-controller=" Manufacturers" asp-action="Index" class="btn btn-secondary me-2">
+                Cancel
+            </a>
+
+            <button type="submit" class="btn btn-primary">
+                Save
+            </button>
+        </div>
+    </form>
+</div>
