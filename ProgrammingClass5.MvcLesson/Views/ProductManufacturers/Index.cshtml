@@ -1,0 +1,32 @@
+﻿@model List<ProductManufacturer>
+
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Adress</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Rating</th>
+
+                    <tbody>
+                        @foreach (ProductManufacturer productManufacturer in Model)
+                    {
+                        <tr>
+                            <td>@productManufacturer.Id </td>
+                            <td>@productManufacturer.Name</td>
+                            <td>@productManufacturer.Adress</td>
+                            <td>@productManufacturer.City</td>
+                            <td>@productManufacturer.Country</td>
+                            <td>@productManufacturer.Rating</td>
+                        </tr>
+                    }
+                    
+                    </tbody>
+
+                </tr>
+            </thead>
+        </table>
+    </div>
