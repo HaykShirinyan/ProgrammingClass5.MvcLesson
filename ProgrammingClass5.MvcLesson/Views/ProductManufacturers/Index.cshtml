@@ -1,6 +1,9 @@
 ﻿@model List<ProductManufacturer>
 
     <div>
+        <a asp-controller="ProductManufacturers" asp-action="Create" class="btn btn-primary">
+            Create ProductManufacturer
+        </a>
         <table class="table">
             <thead>
                 <tr>
@@ -10,6 +13,7 @@
                     <th>City</th>
                     <th>Country</th>
                     <th>Rating</th>
+                    <th>Actions</th>
 
                     <tbody>
                         @foreach (ProductManufacturer productManufacturer in Model)
@@ -21,6 +25,13 @@
                             <td>@productManufacturer.City</td>
                             <td>@productManufacturer.Country</td>
                             <td>@productManufacturer.Rating</td>
+                            <td>
+                                <a asp-controller="ProductManufacturers" asp-action="Edit" asp-route-id="@productManufacturer.Id" class="btn btn-secondary">
+
+                                    Edit
+
+                                </a>
+                            </td>
                         </tr>
                     }
                     
