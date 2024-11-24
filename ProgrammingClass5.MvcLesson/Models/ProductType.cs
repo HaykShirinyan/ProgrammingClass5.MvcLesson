@@ -13,9 +13,5 @@ namespace ProgrammingClass5.MvcLesson.Models
 
         [StringLength(500)]
         public string Description { get; set; }
-
-        public decimal UnitPrice { get; set; }
-
-        public int Quantity { get; set; }
     }
 }
