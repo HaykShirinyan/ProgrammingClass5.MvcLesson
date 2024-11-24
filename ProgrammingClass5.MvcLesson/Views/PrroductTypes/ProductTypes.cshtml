@@ -1,0 +1,24 @@
+﻿@model List<ProductType>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (ProductType productTypes in Model)
+            {
+                <tr>
+                    <td>@productTypes.Id</td>
+                    <td>@productTypes.Category</td>
+                    <td>@productTypes.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
