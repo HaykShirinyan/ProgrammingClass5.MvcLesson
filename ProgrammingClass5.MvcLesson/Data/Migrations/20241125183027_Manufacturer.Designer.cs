@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammingClass5.MvcLesson.Data;
 
@@ -11,9 +12,11 @@ using ProgrammingClass5.MvcLesson.Data;
 namespace ProgrammingClass5.MvcLesson.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241125183027_Manufacturer")]
+    partial class Manufacturer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -360,7 +363,7 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
 
             modelBuilder.Entity("ProgrammingClass5.MvcLesson.Models.Product", b =>
                 {
-                    b.HasOne("ProgrammingClass5.MvcLesson.Models.Manufacturer", "Manufacturers")
+                    b.HasOne("ProgrammingClass5.MvcLesson.Models.Manufacturer", "Manufacturer")
                         .WithMany()
                         .HasForeignKey("ManufacturerId");
 
@@ -368,7 +371,7 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
                         .WithMany()
                         .HasForeignKey("TypeId");
 
-                    b.Navigation("Manufacturers");
+                    b.Navigation("Manufacturer");
 
                     b.Navigation("Type");
                 });

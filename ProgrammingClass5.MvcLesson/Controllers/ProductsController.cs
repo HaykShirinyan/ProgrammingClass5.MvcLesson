@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProgrammingClass5.MvcLesson.Data;
 using ProgrammingClass5.MvcLesson.Models;
 
@@ -16,7 +17,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Product> products = _dbContext.Products.ToList();
+            List<Product> products = _dbContext.Products.Include(product => product.Type).Include(product => product.Manufacturers).ToList();
 
             return View(products);
         }
@@ -24,7 +25,11 @@ namespace ProgrammingClass5.MvcLesson.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+			ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
+			return View();
+
         }
 
         [HttpPost]
@@ -39,14 +44,21 @@ namespace ProgrammingClass5.MvcLesson.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+			ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
+			return View(product);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
             var product = _dbContext.Products.Find(id);
-            return View(product);
+
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+			ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
+			return View(product);
         }
 
         [HttpPost]
@@ -61,7 +73,10 @@ namespace ProgrammingClass5.MvcLesson.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+			ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
+			return View(product);
         }
     }
 }

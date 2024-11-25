@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammingClass5.MvcLesson.Data;
 
@@ -11,9 +12,11 @@ using ProgrammingClass5.MvcLesson.Data;
 namespace ProgrammingClass5.MvcLesson.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241125161210_ProductTypeId")]
+    partial class ProductTypeId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,14 +235,10 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -258,9 +257,6 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int?>("ManufacturerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -276,8 +272,6 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ManufacturerId");
 
                     b.HasIndex("TypeId");
 
@@ -360,15 +354,9 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
 
             modelBuilder.Entity("ProgrammingClass5.MvcLesson.Models.Product", b =>
                 {
-                    b.HasOne("ProgrammingClass5.MvcLesson.Models.Manufacturer", "Manufacturers")
-                        .WithMany()
-                        .HasForeignKey("ManufacturerId");
-
                     b.HasOne("ProgrammingClass5.MvcLesson.Models.ProductType", "Type")
                         .WithMany()
                         .HasForeignKey("TypeId");
-
-                    b.Navigation("Manufacturers");
 
                     b.Navigation("Type");
                 });

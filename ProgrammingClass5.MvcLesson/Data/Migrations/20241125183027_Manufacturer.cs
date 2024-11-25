@@ -1,0 +1,68 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace ProgrammingClass5.MvcLesson.Data.Migrations
+{
+    /// <inheritdoc />
+    public partial class Manufacturer : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AddColumn<int>(
+                name: "ManufacturerId",
+                table: "Products",
+                type: "int",
+                nullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Name",
+                table: "Manufacturers",
+                type: "nvarchar(50)",
+                maxLength: 50,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(100)",
+                oldMaxLength: 100);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_ManufacturerId",
+                table: "Products",
+                column: "ManufacturerId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Products_Manufacturers_ManufacturerId",
+                table: "Products",
+                column: "ManufacturerId",
+                principalTable: "Manufacturers",
+                principalColumn: "Id");
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Products_Manufacturers_ManufacturerId",
+                table: "Products");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Products_ManufacturerId",
+                table: "Products");
+
+            migrationBuilder.DropColumn(
+                name: "ManufacturerId",
+                table: "Products");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Name",
+                table: "Manufacturers",
+                type: "nvarchar(100)",
+                maxLength: 100,
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(50)",
+                oldMaxLength: 50);
+        }
+    }
+}

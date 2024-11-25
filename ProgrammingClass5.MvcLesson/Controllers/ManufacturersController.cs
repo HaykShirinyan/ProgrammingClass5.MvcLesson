@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProgrammingClass5.MvcLesson.Data;
-using ProgrammingClass5.MvcLesson.Data.Migrations;
 using ProgrammingClass5.MvcLesson.Models;
 
 namespace ProgrammingClass5.MvcLesson.Controllers
@@ -15,11 +15,11 @@ namespace ProgrammingClass5.MvcLesson.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(ApplicationDbContext _dbContext)
+        public IActionResult Index()
         {
-            List<Manufacturer> manufacturers = _dbContext.Manufacturers.ToList();
+            List<Manufacturer> Manufacturers = _dbContext.Manufacturers.ToList();
 
-            return View(manufacturers);
+            return View(Manufacturers);
         }
 
         [HttpGet]
@@ -30,39 +30,42 @@ namespace ProgrammingClass5.MvcLesson.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Manufacturer manufacturers)
+        public IActionResult Create(Manufacturer Manufacturers)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Manufacturers.Add(manufacturers);
+                _dbContext.Manufacturers.Add(Manufacturers);
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View(manufacturers);
+            return View(Manufacturers);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var manufacturers = _dbContext.ProductTypes.Find(id);
-            return View(manufacturers);
+            var product = _dbContext.Manufacturers.Find(id);
+
+
+            return View(product);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Manufacturer manufacturers)
+        public IActionResult Edit(Manufacturer Manufacturers)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Manufacturers.Update(manufacturers);
+                _dbContext.Manufacturers.Update(Manufacturers);
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View(manufacturers);
+
+            return View(Manufacturers);
         }
     }
 }
