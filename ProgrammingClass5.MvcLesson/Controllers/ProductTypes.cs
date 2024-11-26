@@ -74,12 +74,6 @@ namespace ProgrammingClass5.MvcLesson.Controllers
 
 
         }
-
-
-
-
-
-
-        
+                        
     }
 }
