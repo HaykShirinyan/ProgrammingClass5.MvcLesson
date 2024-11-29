@@ -13,5 +13,8 @@ namespace ProgrammingClass5.MvcLesson.Data
             : base(options)
         {
         }
+        public DbSet<ProductType> ProductTypes { get; set; }
+
+        public DbSet<Manufacturer> Manufacturers { get; set; }
     }
 }
