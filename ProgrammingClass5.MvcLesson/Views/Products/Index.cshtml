@@ -13,6 +13,7 @@
                 <th>Description</th>
                 <th>Unit Price</th>
                 <th>Quantity</th>
+                <th>Unit of Measure</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,6 +27,9 @@
                     <td>@product.Description</td>
                     <td>@product.UnitPrice</td>
                     <td>@product.Quantity</td>
+                    <td>
+                        @product.UnitOfMeasure?.Name
+                    </td>
                     <td>
                         <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-secondary">
                             Edit

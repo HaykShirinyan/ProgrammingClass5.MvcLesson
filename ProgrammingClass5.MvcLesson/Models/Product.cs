@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProgrammingClass5.MvcLesson.Models
 {
@@ -17,5 +18,8 @@ namespace ProgrammingClass5.MvcLesson.Models
         public decimal UnitPrice { get; set; }
 
         public int Quantity { get; set; }
+
+        public int? UnitOfMeasureId { get; set; }
+        public UnitOfMeasure UnitOfMeasure { get; set; }
     }
 }
