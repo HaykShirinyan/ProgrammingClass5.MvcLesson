@@ -12,8 +12,8 @@ using ProgrammingClass5.MvcLesson.Data;
 namespace ProgrammingClass5.MvcLesson.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241118084614_ProductTypes")]
-    partial class productTypes
+    [Migration("20241201190055_ProductTypesAndManufacturers")]
+    partial class ProductTypesAndManufacturers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -298,7 +298,8 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
