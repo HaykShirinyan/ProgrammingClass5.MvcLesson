@@ -20,6 +20,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             List<Product> products = _dbContext
                 .Products
                 .Include(product => product.UnitOfMeasure)
+                .Include(product => product.ProductType)
                 .ToList();
 
             return View(products);
@@ -29,6 +30,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
         public IActionResult Create()
         {
             ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
 
             return View();
         }
@@ -46,6 +48,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             }
 
             ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
 
             return View(product);
         }
@@ -56,6 +59,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             var product = _dbContext.Products.Find(id);
 
             ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
 
             return View(product);
         }
@@ -73,6 +77,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             }
 
             ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
 
             return View(product);
         }
