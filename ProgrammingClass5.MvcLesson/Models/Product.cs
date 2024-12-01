@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ProgrammingClass5.MvcLesson.Data.Migrations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProgrammingClass5.MvcLesson.Models
@@ -24,5 +25,8 @@ namespace ProgrammingClass5.MvcLesson.Models
 
         public int? ProductTypeId { get; set; }
         public ProductType ProductType { get; set; }
+
+        public int? ManufacturerId { get; set; }
+        public Manufacturer Manufacturer { get; set; }
     }
 }
