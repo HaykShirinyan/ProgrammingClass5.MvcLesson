@@ -26,6 +26,21 @@
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
+        <div class="mb-3">
+            <label asp-for="UnitOfMeasureId" class="form-label">Unit of Measure</label>
+            <select asp-for="UnitOfMeasureId" class="form-control">
+                <option value=""></option>
+
+                @if (ViewBag.UnitOfMeasures != null)
+                {
+                    foreach (UnitOfMeasure measure in ViewBag.UnitOfMeasures as List<UnitOfMeasure>)
+                    {
+                        <option value="@measure.Id">@measure.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
         <div class="d-flex justify-content-end">
             <a asp-controller="Products" asp-action="Index" class="btn btn-secondary me-2">
                 Cancel

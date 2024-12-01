@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammingClass5.MvcLesson.Data;
 
@@ -11,9 +12,11 @@ using ProgrammingClass5.MvcLesson.Data;
 namespace ProgrammingClass5.MvcLesson.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241124184840_UnitOfMeasures")]
+    partial class UnitOfMeasures
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,15 +247,10 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UnitOfMeasureId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UnitOfMeasureId");
 
                     b.ToTable("Products");
                 });
@@ -277,57 +275,6 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UnitOfMeasures");
-                });
-
-            modelBuilder.Entity("ProgrammingClass5.MvcLesson.Models.ProductManufacturer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductManufacturers");
-                });
-
-            modelBuilder.Entity("ProgrammingClass5.MvcLesson.Models.ProductType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -379,15 +326,6 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ProgrammingClass5.MvcLesson.Models.Product", b =>
-                {
-                    b.HasOne("ProgrammingClass5.MvcLesson.Models.UnitOfMeasure", "UnitOfMeasure")
-                        .WithMany()
-                        .HasForeignKey("UnitOfMeasureId");
-
-                    b.Navigation("UnitOfMeasure");
                 });
 #pragma warning restore 612, 618
         }
