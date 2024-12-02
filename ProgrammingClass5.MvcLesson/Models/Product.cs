@@ -22,5 +22,7 @@ namespace ProgrammingClass5.MvcLesson.Models
         public ProductType Type { get; set; }
 		public int? ManufacturerId { get; set; }
 		public Manufacturer Manufacturers { get; set; }
-	}
+        public int? UnitOfMeasureId { get; set; }
+        public UnitOfMeasure UnitOfMeasure { get; set; }
+    }
 }
