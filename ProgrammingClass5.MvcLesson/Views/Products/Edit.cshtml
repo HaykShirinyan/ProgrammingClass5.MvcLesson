@@ -27,6 +27,35 @@
         </div>
 
         <div class="mb-3">
+            <label asp-for="ProductTypeId" class="form-label" Product Type></label>
+            <select asp-for="ProductTypeId" class="form-control">
+                <option value=""></option>
+                @if(ViewBag.ProductTypes !-null)
+                {
+                    foreach(ProductType type in ViewBag.ProductTypes as List<ProductType>)
+                    {
+                        <option vlue="@type.Id">@type.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="ManufacturerId" class="form-label"></label>
+            <select asp-for="ManufacturerId" class="form-control">
+                <option value=""></option>
+                @if(ViewBag.Manufacturers != null)
+                {
+                    foreach(Manufacturer manufacturer in ViewBag.Manufacturers as List<Manufacturer>)
+                    {
+                        <option value="@manufacturer.Id">@manufacturer.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label asp-for="UnitOfMeasureId" class="form-label">Unit of Measure</label>
             <select asp-for="UnitOfMeasureId" class="form-control">
                 <option value=""></option>

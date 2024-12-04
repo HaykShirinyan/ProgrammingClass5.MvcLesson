@@ -1,0 +1,31 @@
+﻿@model List<Manufacturer>
+
+<div>
+    <a asp-controller="Manufacturers" asp-action="Create" class="btn btn-primary">
+        Create Manufacturer
+    </a>
+    <tabel class="table">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Description</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Manufacturer manufacturer in Model)
+            {
+                <tr>
+                    <td>@manufacturer.Id</td>
+                    <td>@manufacturer.Name</td>
+                    <td>@manufacturer.Description</td>
+                    <td>
+                        <a asp-controller="Manufacturers" asp-action="Edit" asp-route-id="@manufacturer.Id" class="btn btn-secondary">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </tabel>
+</div>

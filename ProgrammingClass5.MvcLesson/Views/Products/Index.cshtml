@@ -13,6 +13,8 @@
                 <th>Description</th>
                 <th>Unit Price</th>
                 <th>Quantity</th>
+                <td>Product Type</td>
+                <td>Manufacturer</td>
                 <th>Unit of Measure</th>
                 <th>Actions</th>
             </tr>
@@ -27,6 +29,12 @@
                     <td>@product.Description</td>
                     <td>@product.UnitPrice</td>
                     <td>@product.Quantity</td>
+                    <td>
+                        @product.ProductType?.Name
+                    </td>
+                    <td>
+                        @product.Manufacturer?.Name
+                    </td>
                     <td>
                         @product.UnitOfMeasure?.Name
                     </td>
