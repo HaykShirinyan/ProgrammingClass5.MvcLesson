@@ -1,8 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "Nurin Dance Studio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/site.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Nurin Dance Studio</h1>
+        <p>Feel the power of Armenian dance!</p>
+        <nav>
+            <ul>
+                <li><a href="/Home/About">About</a></li>
+                <li><a href="/Home/Contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>
