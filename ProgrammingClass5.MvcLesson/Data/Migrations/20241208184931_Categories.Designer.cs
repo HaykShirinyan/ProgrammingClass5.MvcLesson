@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammingClass5.MvcLesson.Data;
 
@@ -11,9 +12,11 @@ using ProgrammingClass5.MvcLesson.Data;
 namespace ProgrammingClass5.MvcLesson.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241208184931_Categories")]
+    partial class Categories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,21 +282,6 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("ProgrammingClass5.MvcLesson.Models.ProductCategory", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "CategoryId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("ProductCategories");
-                });
-
             modelBuilder.Entity("ProgrammingClass5.MvcLesson.Models.UnitOfMeasure", b =>
                 {
                     b.Property<int>("Id")
@@ -374,25 +362,6 @@ namespace ProgrammingClass5.MvcLesson.Data.Migrations
                         .HasForeignKey("UnitOfMeasureId");
 
                     b.Navigation("UnitOfMeasure");
-                });
-
-            modelBuilder.Entity("ProgrammingClass5.MvcLesson.Models.ProductCategory", b =>
-                {
-                    b.HasOne("ProgrammingClass5.MvcLesson.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProgrammingClass5.MvcLesson.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }
