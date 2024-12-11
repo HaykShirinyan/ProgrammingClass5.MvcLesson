@@ -42,6 +42,12 @@
         </div>
 
         <div class="mb-3">
+            <a asp-controller="ProductCategories" asp-action="Index" asp-route-productId="@Model.Id">
+                Categories
+            </a>
+        </div>
+
+        <div class="mb-3">
             <label asp-for="ProductManufacturerId" class="form-label">Product Manufacturer</label>
             <select asp-for="ProductManufacturerId" class="form-control">
                 <option value=""></option>
