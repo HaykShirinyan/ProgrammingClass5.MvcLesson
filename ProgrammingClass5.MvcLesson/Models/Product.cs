@@ -25,5 +25,11 @@ namespace ProgrammingClass5.MvcLesson.Models
         public int? ProductManufacturerId { get; set; } 
 
         public ProductManufacturer ProductManufacturer { get; set; }
+
+        public int? ProductTypeId { get; set; }
+
+        public ProductType ProductType { get; set; }    
+
+
     }
 }
