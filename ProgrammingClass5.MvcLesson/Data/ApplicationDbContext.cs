@@ -8,6 +8,8 @@ namespace ProgrammingClass5.MvcLesson.Data
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
 
         public DbSet<ProductType> ProductTypes { get; set; }
 
@@ -16,6 +18,13 @@ namespace ProgrammingClass5.MvcLesson.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<ProductCategory>().HasKey(x => new { x.ProductId, x.CategoryId });
         }
     }
 }
