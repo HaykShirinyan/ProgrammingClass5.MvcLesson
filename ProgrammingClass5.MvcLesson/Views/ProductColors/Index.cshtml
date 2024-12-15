@@ -22,7 +22,7 @@
                 <tr>
                     <td>@productColor.Color.Id</td>
                     <td>@productColor.Color.Name</td>
-                        <form asp-controller="ProductColors"
+                       <td> <form asp-controller="ProductColors"
                               asp-action="Delete"
                           asp-route-productId="@productColor.ProductId"
                           asp-route-colorId="@productColor.ColorId">
@@ -30,6 +30,7 @@
                                 Delete
                             </button>
                         </form>
+                    </td>
                 </tr>
             }
         </tbody>
