@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClass5.MvcLesson.Data;
 using ProgrammingClass5.MvcLesson.Models;
+using ProgrammingClass5.MvcLesson.ViewModels;
 
 namespace ProgrammingClass5.MvcLesson.Controllers
 {
@@ -23,9 +24,13 @@ namespace ProgrammingClass5.MvcLesson.Controllers
                 .Where(productCategory => productCategory.ProductId == productId)
                 .ToList();
 
-            ViewBag.ProductId = productId;
+            var viewModel = new ProductCategoryListViewModel
+            {
+                ProductId = productId,
+                ProductCategories = productCategories
+            };
 
-            return View(productCategories);
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -36,21 +41,25 @@ namespace ProgrammingClass5.MvcLesson.Controllers
                 ProductId = productId
             };
 
-            ViewBag.Categories = _dbContext.Categories.ToList();
+            var viewModel = new ProductCategoryViewModel
+            {
+                ProductCategory = model,
+                Categories = _dbContext.Categories.ToList()
+            };
 
-            return View(model);
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ProductCategory productCategory)
+        public IActionResult Create(ProductCategoryViewModel viewModel)
         {
-            _dbContext.ProductCategories.Add(productCategory);
+            _dbContext.ProductCategories.Add(viewModel.ProductCategory);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index", new
             {
-                productId = productCategory.ProductId
+                productId = viewModel.ProductCategory.ProductId
             });
         }
 
