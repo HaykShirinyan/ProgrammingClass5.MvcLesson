@@ -1,0 +1,36 @@
+﻿@model ProductColor
+
+<div>
+    <form asp-controller="ProductColors" asp-action="Create">
+        <input type="hidden" asp-for="ProductId" />
+
+        <div class="mb-3">
+            <label asp-for="ColorId" class="form-label">
+                Color
+            </label>
+            <select asp-for="ColorId" class="form-control">
+                @if (ViewBag.Colors != null)
+                {
+                    @foreach (var color in ViewBag.Colors as List<Color>)
+                    {
+                        <option value="@color.Id">
+                            @color.Name
+                        </option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <a asp-controller="ProductColors" 
+            asp-action="Index" asp-route-productId="@Model.ProductId" 
+            class="btn btn-secondary me-2">
+                Cancel
+            </a>
+
+            <button type="submit" class="btn btn-primary">
+                Save
+            </button>
+        </div>
+    </form>
+</div>

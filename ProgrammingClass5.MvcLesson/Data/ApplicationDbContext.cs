@@ -15,6 +15,14 @@ namespace ProgrammingClass5.MvcLesson.Data
 
         public DbSet<Manufacturer> Manufacturers { get; set; }
 
+        public DbSet<Size> Sizes { get; set; }
+
+        public DbSet<Color> Colors { get; set; }
+
+        public DbSet<ProductSize> ProductSizes { get; set; }
+
+        public DbSet<ProductColor> ProductColors { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -25,6 +33,10 @@ namespace ProgrammingClass5.MvcLesson.Data
             base.OnModelCreating(builder);
 
             builder.Entity<ProductCategory>().HasKey(x => new { x.ProductId, x.CategoryId });
+
+            builder.Entity<ProductSize>().HasKey(x => new { x.ProductId, x.SizeId });
+            
+            builder.Entity<ProductColor>().HasKey(x => new { x.ProductId, x.ColorId });
         }
     }
 }

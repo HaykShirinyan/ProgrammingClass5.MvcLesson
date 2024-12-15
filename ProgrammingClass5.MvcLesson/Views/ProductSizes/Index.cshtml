@@ -1,0 +1,42 @@
+﻿@model List<ProductSize>
+
+<div>
+    <div class="mb-3">
+        <a asp-controller="ProductSizes" asp-action="Create" asp-route-productId="@ViewBag.ProductId" class="btn btn-primary">
+            Create
+        </a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var productSize in Model)
+            {
+                <tr>
+                    <td>@productSize.Size.Id</td>
+                    <td>@productSize.Size.Name</td>
+                    <td>@productSize.Size.Description</td>
+
+                    <td>
+                        <form asp-controller="ProductSizes"
+                              asp-action="Delete"
+                              asp-route-productId="@productSize.ProductId"
+                              asp-route-categoryId="@productSize.SizeId">
+                            <button type="submit" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

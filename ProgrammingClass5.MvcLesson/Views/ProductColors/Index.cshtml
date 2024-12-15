@@ -1,0 +1,37 @@
+﻿@model List<ProductColor>
+
+<div>
+    <div class="mb-3">
+        <a asp-controller="ProductColors" asp-action="Create" asp-route-productId="@ViewBag.ProductId" class="btn btn-primary">
+            Create
+        </a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var productColor in Model)
+            {
+                <tr>
+                    <td>@productColor.Color.Id</td>
+                    <td>@productColor.Color.Name</td>
+                        <form asp-controller="ProductColors"
+                              asp-action="Delete"
+                          asp-route-productId="@productColor.ProductId"
+                          asp-route-colorId="@productColor.ColorId">
+                            <button type="submit" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
