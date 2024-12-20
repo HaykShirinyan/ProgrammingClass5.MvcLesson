@@ -1,28 +1,25 @@
-﻿@model ProductCategory
+﻿@model ProductCategoryViewModel
 
 <div>
     <form asp-controller="ProductCategories" asp-action="Create">
-        <input type="hidden" asp-for="ProductId" />
+        <input type="hidden" asp-for="@Model.ProductCategory.ProductId" />
 
         <div class="mb-3">
-            <label asp-for="CategoryId" class="form-label">
+            <label asp-for="@Model.ProductCategory.CategoryId" class="form-label">
                 Category
             </label>
-            <select asp-for="CategoryId" class="form-control">
-                @if (ViewBag.Categories != null)
+            <select asp-for="@Model.ProductCategory.CategoryId" class="form-control">
+                @foreach (var category in Model.Categories)
                 {
-                    @foreach (var category in ViewBag.Categories as List<Category>)
-                    {
-                        <option value="@category.Id">
-                            @category.Name
-                        </option>
-                    }
+                    <option value="@category.Id">
+                        @category.Name
+                    </option>
                 }
             </select>
         </div>
 
         <div class="d-flex justify-content-end">
-            <a asp-controller="ProductCategories" asp-action="Index" asp-route-productId="@Model.ProductId" class="btn btn-secondary me-2">
+            <a asp-controller="ProductCategories" asp-action="Index" asp-route-productId="@Model.ProductCategory..ProductId" class="btn btn-secondary me-2">
                 Cancel
             </a>
 
