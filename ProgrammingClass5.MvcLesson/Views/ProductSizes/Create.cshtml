@@ -1,0 +1,31 @@
+﻿@model ProductSizeViewModel
+
+<div>
+    <form asp-controller="ProductSizes" asp-action="Create">
+        <input type="hidden" asp-for="@Model.ProductSize.ProductId" />
+
+        <div class="mb-3">
+            <label asp-for="@Model.ProductSize.SizeId" class="form-label">
+                Size
+            </label>
+            <select asp-for="@Model.ProductSize.SizeId" class="form-control">
+                @foreach (var size in Model.Sizes)
+                {
+                    <option value="@size.Id">
+                        @size.Name
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <a asp-controller="ProductSizes" asp-action="Index" asp-route-productId="@Model.ProductSize..ProductId" class="btn btn-secondary me-2">
+                Cancel
+            </a>
+
+            <button type="submit" class="btn btn-primary">
+                Save
+            </button>
+        </div>
+    </form>
+</div>
