@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClass5.MvcLesson.Data;
 using ProgrammingClass5.MvcLesson.Models;
+using ProgrammingClass5.MvcLesson.ViewModels;
+using System.Security.Claims;
 
 namespace ProgrammingClass5.MvcLesson.Controllers
 {
@@ -28,53 +31,58 @@ namespace ProgrammingClass5.MvcLesson.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+            var viewModel = new ProductViewModel
+            {
+                UnitOfMeasures = _dbContext.UnitOfMeasures.ToList()
+            };
 
-            return View();
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Products.Add(product);
+                _dbContext.Products.Add(viewModel.Product);
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+            viewModel.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
 
-            return View(product);
+            return View(viewModel);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var product = _dbContext.Products.Find(id);
+            var viewModel = new ProductViewModel
+            {
+                Product = _dbContext.Products.Find(id),
+                UnitOfMeasures = _dbContext.UnitOfMeasures.ToList()
+            };
 
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-
-            return View(product);
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(ProductViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Products.Update(product);
+                _dbContext.Products.Update(viewModel.Product);
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+            viewModel.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
 
-            return View(product);
+            return View(viewModel);
         }
     }
 }

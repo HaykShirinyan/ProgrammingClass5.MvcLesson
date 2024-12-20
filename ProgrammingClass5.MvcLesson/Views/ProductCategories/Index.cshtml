@@ -1,8 +1,8 @@
-﻿@model List<ProductCategory>
+﻿@model ProductCategoryListViewModel
 
 <div>
     <div class="mb-3">
-        <a asp-controller="ProductCategories" asp-action="Create" asp-route-productId="@ViewBag.ProductId" class="btn btn-primary">
+        <a asp-controller="ProductCategories" asp-action="Create" asp-route-productId="@Model.ProductId" class="btn btn-primary">
             Create
         </a>
     </div>
@@ -18,7 +18,7 @@
         </thead>
 
         <tbody>
-            @foreach (var productCategory in Model)
+            @foreach (var productCategory in Model.ProductCategories)
             {
                 <tr>
                     <td>@productCategory.Category.Id</td>
