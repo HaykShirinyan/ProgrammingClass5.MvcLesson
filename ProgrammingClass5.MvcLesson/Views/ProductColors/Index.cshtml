@@ -1,8 +1,8 @@
-﻿@model List<ProductColor>
+﻿@model ProductColorListViewModel
 
 <div>
     <div class="mb-3">
-        <a asp-controller="ProductColors" asp-action="Create" asp-route-productId="@ViewBag.ProductId" class="btn btn-primary">
+        <a asp-controller="ProductColors" asp-action="Create" asp-route-productId="@Model.ProductId" class="btn btn-primary">
             Create
         </a>
     </div>
@@ -17,7 +17,7 @@
         </thead>
 
         <tbody>
-            @foreach (var productColor in Model)
+            @foreach (var productColor in Model.ProductColors)
             {
                 <tr>
                     <td>@productColor.Color.Id</td>

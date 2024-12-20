@@ -1,30 +1,27 @@
-﻿@model ProductSize
+﻿@model ProductSizeViewModel
 
 <div>
     <form asp-controller="ProductSizes" asp-action="Create">
-        <input type="hidden" asp-for="ProductId" />
+        <input type="hidden" asp-for="@Model.ProductSize.ProductId" />
 
         <div class="mb-3">
-            <label asp-for="SizeId" class="form-label">
+            <label asp-for="@Model.ProductSize.SizeId" class="form-label">
                 Size
             </label>
-            <select asp-for="SizeId" class="form-control">
-                @if (ViewBag.Sizes != null)
+            <select asp-for="@Model.ProductSize.SizeId" class="form-control">
+                @foreach (var size in Model.Sizes)
                 {
-                    @foreach (var size in ViewBag.Sizes as List<Size>)
-                    {
-                        <option value="@size.Id">
-                            @size.Name
-                        </option>
-                    }
+                    <option value="@size.Id">
+                        @size.Name
+                    </option>
                 }
             </select>
         </div>
 
         <div class="d-flex justify-content-end">
             <a asp-controller="ProductSizes" 
-            asp-action="Index" 
-            asp-route-productId="@Model.ProductId" class="btn btn-secondary me-2">
+            asp-action="Index"
+               asp-route-productId="@Model.ProductSize.ProductId" class="btn btn-secondary me-2">
                 Cancel
             </a>
 

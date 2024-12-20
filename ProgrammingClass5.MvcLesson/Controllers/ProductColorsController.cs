@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClass5.MvcLesson.Data;
+using ProgrammingClass5.MvcLesson.Data.Migrations;
 using ProgrammingClass5.MvcLesson.Models;
+using ProgrammingClass5.MvcLesson.ViewModels;
 
 namespace ProgrammingClass5.MvcLesson.Controllers
 {
@@ -23,9 +25,13 @@ namespace ProgrammingClass5.MvcLesson.Controllers
                 .Where(productColor => productColor.ProductId == productId)
                 .ToList();
 
-            ViewBag.ProductId = productId;
+            var viewModel = new ProductColorListViewModel
+            {
+                ProductId = productId,
+                ProductColors = productColors
+            };
 
-            return View(productColors);
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -36,21 +42,25 @@ namespace ProgrammingClass5.MvcLesson.Controllers
                 ProductId = productId
             };
 
-            ViewBag.Colors = _dbContext.Colors.ToList();
+            var viewModel = new ProductColorViewModel
+            {
+                ProductColor = model,
+                Colors = _dbContext.Colors.ToList()
+            };
 
-            return View(model);
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ProductColor productColor)
+        public IActionResult Create(ProductColorViewModel viewModel)
         {
-            _dbContext.ProductColors.Add(productColor);
+            _dbContext.ProductColors.Add(viewModel.ProductColor);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index", new
             {
-                productId = productColor.ProductId
+                productId = viewModel.ProductColor.ProductId
             });
         }
 

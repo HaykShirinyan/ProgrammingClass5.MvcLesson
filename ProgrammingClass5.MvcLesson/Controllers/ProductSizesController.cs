@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ProgrammingClass5.MvcLesson.Data;
 using ProgrammingClass5.MvcLesson.Data.Migrations;
 using ProgrammingClass5.MvcLesson.Models;
+using ProgrammingClass5.MvcLesson.ViewModels;
 
 namespace ProgrammingClass5.MvcLesson.Controllers
 {
@@ -24,9 +25,13 @@ namespace ProgrammingClass5.MvcLesson.Controllers
                 .Where(productSize => productSize.ProductId == productId)
                 .ToList();
 
-            ViewBag.ProductId = productId;
+            var viewModel = new ProductSizeListViewModel
+            {
+                ProductId = productId,
+                ProductSizes = productSizes
+            };
 
-            return View(productSizes);
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -37,21 +42,25 @@ namespace ProgrammingClass5.MvcLesson.Controllers
                 ProductId = productId
             };
 
-            ViewBag.Sizes = _dbContext.Sizes.ToList();
+            var viewModel = new ProductSizeViewModel
+            {
+                ProductSize = model,
+                Sizes = _dbContext.Sizes.ToList()
+            };
 
-            return View(model);
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ProductSize productSize)
+        public IActionResult Create(ProductSizeViewModel viewModel)
         {
-            _dbContext.ProductSizes.Add(productSize);
+            _dbContext.ProductSizes.Add(viewModel.ProductSize);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index", new
             {
-                productId = productSize.ProductId
+                productId = viewModel.ProductSize.ProductId
             });
         }
 

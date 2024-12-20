@@ -32,8 +32,6 @@ namespace ProgrammingClass5.MvcLesson.Data
         {
             base.OnModelCreating(builder);
 
-            users
-
             builder.Entity<ProductCategory>().HasKey(x => new { x.ProductId, x.CategoryId });
 
             builder.Entity<ProductSize>().HasKey(x => new { x.ProductId, x.SizeId });
