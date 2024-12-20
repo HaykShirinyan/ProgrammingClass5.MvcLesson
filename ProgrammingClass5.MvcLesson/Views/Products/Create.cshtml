@@ -1,11 +1,13 @@
 ﻿@model ProductViewModel
 
 <div>
+        
     <h1>
         Create Product
     </h1>
 
-    <form asp-controller="Products" asp-action="Create">
+	<form asp-controller="Products" asp-action="Create">
+
         <div class="mb-3">
             <label asp-for="Product.Name" class="form-label"></label>
             <input asp-for="Product.Name" class="form-control" />
