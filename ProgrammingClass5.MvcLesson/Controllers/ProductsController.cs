@@ -28,61 +28,72 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             return View(products);
         }
 
-        [HttpGet]
-        public IActionResult Create()
+        [HttpPost]
+        [Authorize]
+        public IActionResult AddToCart(int productId)
         {
-            var viewModel = new ProductViewModel
-            {
-                UnitOfMeasures = _dbContext.UnitOfMeasures.ToList()
-            };
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            return View(viewModel);
+            if (userId == null)
+                return Unauthorized();
+
+            var cartItem = _dbContext.CartItems
+                .FirstOrDefault(c => c.ProductId == productId && c.UserId == userId);
+
+            if (cartItem != null)
+            {
+                cartItem.Quantity++;
+            }
+            else
+            {
+                _dbContext.CartItems.Add(new CartItem
+                {
+                    ProductId = productId,
+                    UserId = userId,
+                    Quantity = 1
+                });
+            }
+
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(ProductViewModel viewModel)
+        [Authorize]
+        public IActionResult RemoveFromCart(int cartItemId)
         {
-            if (ModelState.IsValid)
-            {
-                _dbContext.Products.Add(viewModel.Product);
-                _dbContext.SaveChanges();
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                return RedirectToAction("Index");
+            if (userId == null)
+                return Unauthorized();
+
+            var cartItem = _dbContext.CartItems
+                .FirstOrDefault(c => c.Id == cartItemId && c.UserId == userId);
+
+            if (cartItem != null)
+            {
+                _dbContext.CartItems.Remove(cartItem);
+                _dbContext.SaveChanges();
             }
 
-            viewModel.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-
-            return View(viewModel);
+            return RedirectToAction("Cart");
         }
+
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        [Authorize]
+        public IActionResult Cart()
         {
-            var viewModel = new ProductViewModel
-            {
-                Product = _dbContext.Products.Find(id),
-                UnitOfMeasures = _dbContext.UnitOfMeasures.ToList()
-            };
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            return View(viewModel);
-        }
+            var cartItems = _dbContext.CartItems
+                .Where(c => c.UserId == userId)
+                .Include(c => c.Product)
+                .ThenInclude(p => p.UnitOfMeasure)
+                .ToList();
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(ProductViewModel viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _dbContext.Products.Update(viewModel.Product);
-                _dbContext.SaveChanges();
-
-                return RedirectToAction("Index");
-            }
-
-            viewModel.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-
-            return View(viewModel);
+            return View(cartItems);
         }
     }
 }

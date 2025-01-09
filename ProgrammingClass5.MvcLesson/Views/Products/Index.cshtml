@@ -1,8 +1,8 @@
 ﻿@model List<Product>
 
 <div>
-    <a asp-controller="Products" asp-action="Create" class="btn btn-primary">
-        Create Product
+    <a asp-controller="Products" asp-action="Cart" class="btn btn-primary">
+        View Cart
     </a>
 
     <table class="table">
@@ -21,21 +21,23 @@
         <tbody>
             @foreach (Product product in Model)
             {
-                <tr>
-                    <td>@product.Id</td>
-                    <td>@product.Name</td>
-                    <td>@product.Description</td>
-                    <td>@product.UnitPrice</td>
-                    <td>@product.Quantity</td>
-                    <td>
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Name</td>
+                        <td>@product.Description</td>
+                        <td>@product.UnitPrice</td>
+                        <td>@product.Quantity</td>
+                        <td>
                         @product.UnitOfMeasure?.Name
-                    </td>
-                    <td>
-                        <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-secondary">
-                            Edit
-                        </a>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <form asp-controller="Products" asp-action="AddToCart" method="post">
+                            @Html.AntiForgeryToken()
+                                <input type="hidden" name="productId" value="@product.Id" />
+                                <button type="submit" class="btn btn-success">Add to Cart</button>
+                            </form>
+                        </td>
+                    </tr>
             }
         </tbody>
     </table>
