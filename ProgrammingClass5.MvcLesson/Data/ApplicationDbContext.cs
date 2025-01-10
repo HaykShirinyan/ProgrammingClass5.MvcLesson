@@ -10,7 +10,10 @@ namespace ProgrammingClass5.MvcLesson.Data
         public DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
-
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<ProductColor> ProductColors { get; set; }  
         public DbSet<ProductType> ProductTypes { get; set; }
 
         public DbSet<Manufacturer> Manufacturers { get; set; }
@@ -25,6 +28,8 @@ namespace ProgrammingClass5.MvcLesson.Data
             base.OnModelCreating(builder);
 
             builder.Entity<ProductCategory>().HasKey(x => new { x.ProductId, x.CategoryId });
+            builder.Entity<ProductSize>().HasKey(x => new { x.ProductId, x.SizeId });
+            builder.Entity<ProductColor>().HasKey(x => new { x.ProductId,x.ColorId});
         }
     }
 }

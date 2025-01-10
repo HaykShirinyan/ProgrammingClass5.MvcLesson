@@ -1,10 +1,9 @@
 ﻿@model List<ProductType>
 
 <div>
-    <a asp-controller="ProductTypes" asp-action="Crete" class="btn btn-primary">
+    <a asp-controller="ProductTypes" asp-action="Create" class="btn btn-primary">
         Create Product Type
     </a>
-
     <table class="table">
         <thead>
             <tr>
@@ -15,7 +14,7 @@
         </thead>
 
         <tbody>
-            @foreach(ProductType productType in Model)
+            @foreach (ProductType productType in Model)
             {
                 <tr>
                     <td>@productType.Id</td>

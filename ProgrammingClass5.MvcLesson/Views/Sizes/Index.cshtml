@@ -1,0 +1,36 @@
+﻿@model List<Size>
+<div>
+    <a asp-controller="Sizes" asp-action="Create" class="btn btn-primary">
+        Create Size
+    </a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Width</th>
+                <th>Height</th>
+                <th>Depth</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Size size in Model)
+            {
+                <tr>
+                    <td>@size.Id</td>
+                    <td>@size.Width</td>
+                    <td>@size.Height</td>
+                    <td>@size.Depth</td>
+                    <td>@size.Description</td>
+                    <td>
+                        <a asp-controller="Sizes" asp-action="Edit" asp-route-id="@size.Id" class="btn btn-secondary">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

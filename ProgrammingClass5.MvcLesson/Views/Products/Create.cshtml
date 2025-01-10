@@ -34,11 +34,11 @@
             <label asp-for="ProductTypeId" class="form-label" Product Type></label>
             <select asp-for="ProductTypeId" class="form-control">
                 <option value=""></option>
-                @if (ViewBag.ProductTypes! - null)
+                @if(ViewBag.ProductTypes !=null)
                 {
                     foreach (ProductType type in ViewBag.ProductTypes as List<ProductType>)
                     {
-                        <option vlue="@type.Id">@type.Name</option>
+                        <option value="@type.Id">@type.Name</option>
                     }
                 }
             </select>

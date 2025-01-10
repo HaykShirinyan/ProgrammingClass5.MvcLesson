@@ -1,0 +1,29 @@
+﻿@model List<Color>
+<div>
+    <a asp-controller="Colors" asp-action="Crete" class="btn btn-primary">
+        Crete Color
+    </a>
+
+    <table class="table">
+        <thead>
+            <tr>ID</tr>
+            <tr>Red</tr>
+            <tr>Green</tr>
+            <tr>Black</tr>
+            <tr>Description</tr>
+        </thead>
+    </table>
+
+    <tbody>
+        @foreach(Color color in Model)
+        {
+            <tr>
+                <td>@color.Id</td>
+                <td>@color.Red</td>
+                <td>@color.Green</td>
+                <td>@color.Black</td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</div>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProgrammingClass5.MvcLesson.Data;
+using ProgrammingClass5.MvcLesson.Data.Migrations;
 using ProgrammingClass5.MvcLesson.Models;
 
 namespace ProgrammingClass5.MvcLesson.Controllers
@@ -7,6 +8,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
     public class ManufacturersController : Controller
     {
         private ApplicationDbContext _dbContext;
+
         public ManufacturersController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -16,6 +18,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
         public IActionResult Index()
         {
             List<Manufacturer> manufacturers = _dbContext.Manufacturers.ToList();
+
             return View(manufacturers);
         }
 
@@ -29,13 +32,14 @@ namespace ProgrammingClass5.MvcLesson.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Manufacturer manufacturer)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _dbContext.Manufacturers.Add(manufacturer);
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
+
             return View(manufacturer);
         }
 
@@ -48,7 +52,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit (Manufacturer manufacturer)
+        public IActionResult Edit(Manufacturer manufacturer)
         {
             if (ModelState.IsValid)
             {
@@ -57,6 +61,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
 
                 return RedirectToAction("Index");
             }
+
             return View(manufacturer);
         }
     }

@@ -4,16 +4,17 @@
     <a asp-controller="Manufacturers" asp-action="Create" class="btn btn-primary">
         Create Manufacturer
     </a>
-    <tabel class="table">
+    <table class="table">
         <thead>
             <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Description</td>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
             </tr>
         </thead>
+
         <tbody>
-            @foreach(Manufacturer manufacturer in Model)
+            @foreach (Manufacturer manufacturer in Model)
             {
                 <tr>
                     <td>@manufacturer.Id</td>
@@ -27,5 +28,5 @@
                 </tr>
             }
         </tbody>
-    </tabel>
+    </table>
 </div>

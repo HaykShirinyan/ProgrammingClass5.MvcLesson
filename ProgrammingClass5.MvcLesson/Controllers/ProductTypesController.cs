@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProgrammingClass5.MvcLesson.Models;
 using ProgrammingClass5.MvcLesson.Data;
+using ProgrammingClass5.MvcLesson.Data.Migrations;
+using ProgrammingClass5.MvcLesson.Models;
 
 namespace ProgrammingClass5.MvcLesson.Controllers
 {
-    public class ProductTypesController : Controller    
+    public class ProductTypesController : Controller
     {
-        public  ApplicationDbContext _dbContext;
+        private ApplicationDbContext _dbContext;
 
-        public ProductTypesController (ApplicationDbContext dbContext)
+        public ProductTypesController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -31,13 +32,14 @@ namespace ProgrammingClass5.MvcLesson.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(ProductType productType)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _dbContext.ProductTypes.Add(productType);
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
+
             return View(productType);
         }
 
@@ -47,18 +49,22 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             var productType = _dbContext.ProductTypes.Find(id);
             return View(productType);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ProductType productType)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _dbContext.ProductTypes.Update(productType);
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
+
             return View(productType);
         }
+
+
     }
 }
