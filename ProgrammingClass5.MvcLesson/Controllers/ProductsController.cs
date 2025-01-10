@@ -23,8 +23,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             List<Product> products = _dbContext
                 .Products
                 .Include(product => product.UnitOfMeasure)
-                .Include(product => product.ProductType)
-                .Include(product => product.Manufacturer)
+
                 .ToList();
 
             return View(products);
@@ -33,9 +32,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
-            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
             var viewModel = new ProductViewModel
             {
                 UnitOfMeasures = _dbContext.UnitOfMeasures.ToList()
@@ -57,9 +54,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             }
 
             viewModel.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
-            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
 
             return View(viewModel);
         }
@@ -74,11 +69,6 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             };
 
             return View(viewModel);
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
-            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
-
-            return View(product);
         }
 
         [HttpPost]
@@ -94,9 +84,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             }
 
             viewModel.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
-            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
 
             return View(viewModel);
         }

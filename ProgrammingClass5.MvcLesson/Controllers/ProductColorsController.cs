@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProgrammingClass5.MvcLesson.Data;
+using ProgrammingClass5.MvcLesson.Data.Migrations;
+using ProgrammingClass5.MvcLesson.Models;
+using ProgrammingClass5.MvcLesson.ViewModels;
 
 namespace ProgrammingClass5.MvcLesson.Controllers
 {
@@ -11,9 +15,70 @@ namespace ProgrammingClass5.MvcLesson.Controllers
         {
             _dbContext = dbContext;
         }
-        public IActionResult Index()
+
+        [HttpGet]
+        public IActionResult Index(int productId)
         {
-            return View();
+            var productColors = _dbContext
+                .ProductColors
+                .Include(productColor => productColor.Color)
+                .Where(productColor => productColor.ProductId == productId)
+                .ToList();
+
+            var viewModel = new ProductColorListViewModel
+            {
+                ProductId = productId,
+                ProductColors = productColors
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Create(int productId)
+        {
+            var model = new ProductColor
+            {
+                ProductId = productId
+            };
+
+            var viewModel = new ProductColorViewModel
+            {
+                ProductColor = model,
+                Colors = _dbContext.Colors.ToList()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ProductColorViewModel viewModel)
+        {
+            _dbContext.ProductColors.Add(viewModel.ProductColor);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index", new
+            {
+                productId = viewModel.ProductColor.ProductId
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int productId, int colorId)
+        {
+            var productColor = _dbContext
+                .ProductColors
+                .SingleOrDefault(productColor => productColor.ProductId == productId && productColor.ColorId == colorId);
+
+            _dbContext.ProductColors.Remove(productColor);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index", new
+            {
+                productId = productColor.ProductId
+            });
         }
     }
 }
