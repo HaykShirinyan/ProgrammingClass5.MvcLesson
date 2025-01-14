@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model ProductViewModel
 
 <div>
     <h1>
@@ -7,40 +7,37 @@
 
     <form asp-controller="Products" asp-action="Create">
         <div class="mb-3">
-            <label asp-for="Name" class="form-label"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <label asp-for="Product.Name" class="form-label"></label>
+            <input asp-for="Product.Name" class="form-control" />
+            <span asp-validation-for="Product.Name" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="Quantity" class="form-label"></label>
-            <input asp-for="Quantity" class="form-control" />
-            <span asp-validation-for="Quantity" class="text-danger"></span>
+            <label asp-for="Product.Quantity" class="form-label"></label>
+            <input asp-for="Product.Quantity" class="form-control" />
+            <span asp-validation-for="Product.Quantity" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="UnitPrice" class="form-label">Unit Price</label>
-            <input asp-for="UnitPrice" class="form-control" />
-            <span asp-validation-for="UnitPrice" class="text-danger"></span>
+            <label asp-for="Product.UnitPrice" class="form-label">Unit Price</label>
+            <input asp-for="Product.UnitPrice" class="form-control" />
+            <span asp-validation-for="Product.UnitPrice" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="Description" class="form-label"></label>
-            <textarea asp-for="Description" rows="5" class="form-control"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
+            <label asp-for="Product.Description" class="form-label"></label>
+            <textarea asp-for="Product.Description" rows="5" class="form-control"></textarea>
+            <span asp-validation-for="Product.Description" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="UnitOfMeasureId" class="form-label">Unit of Measure</label>
-            <select asp-for="UnitOfMeasureId" class="form-control">
+            <label asp-for="Product.UnitOfMeasureId" class="form-label">Unit of Measure</label>
+            <select asp-for="Product.UnitOfMeasureId" class="form-control">
                 <option value=""></option>
 
-                @if (ViewBag.UnitOfMeasures != null)
+                @foreach (var measure in Model.UnitOfMeasures)
                 {
-                    @foreach (UnitOfMeasure measure in ViewBag.UnitOfMeasures as List<UnitOfMeasure>)
-                    {
-                        <option value="@measure.Id">@measure.Name</option>
-                    }
+                    <option value="@measure.Id">@measure.Name</option>
                 }
             </select>
         </div>
