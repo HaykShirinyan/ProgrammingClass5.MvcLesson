@@ -1,4 +1,5 @@
-﻿using ProgrammingClass5.MvcLesson.Models;
+﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+using ProgrammingClass5.MvcLesson.Models;
 
 namespace ProgrammingClass5.MvcLesson.ViewModels
 {
@@ -7,6 +8,10 @@ namespace ProgrammingClass5.MvcLesson.ViewModels
         public Product Product { get; set; }
 
         public List<UnitOfMeasure> UnitOfMeasures { get; set; }
+
+        public List<ProductManufacturer> ProductManufacturers { get; set; }
+
+        public List<ProductType> ProductTypes { get; set; }
 
         public ProductViewModel()
         {

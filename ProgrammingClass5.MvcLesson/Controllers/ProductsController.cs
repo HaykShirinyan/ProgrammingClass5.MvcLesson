@@ -38,12 +38,11 @@ namespace ProgrammingClass5.MvcLesson.Controllers
         {
             var viewModel = new ProductViewModel
             {
-                UnitOfMeasures = _dbContext.UnitOfMeasures.ToList()
+                UnitOfMeasures = _dbContext.UnitOfMeasures.ToList(),
+                ProductManufacturers = _dbContext.ProductManufacturers.ToList(),
+                ProductTypes = _dbContext.ProductTypes.ToList()
             };
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.ProductManufacturers = _dbContext .ProductManufacturers.ToList();
-            ViewBag.ProductTypes = _dbContext .ProductTypes.ToList();
-
+            
             return View(viewModel);
         }
 
@@ -60,9 +59,8 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             }
 
             viewModel.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.ProductManufacturers = _dbContext.ProductManufacturers.ToList();
-            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+            viewModel.ProductManufacturers = _dbContext.ProductManufacturers.ToList();
+            viewModel.ProductTypes = _dbContext.ProductTypes.ToList();
 
             return View(viewModel);
         }
@@ -73,15 +71,15 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             var viewModel = new ProductViewModel
             {
                 Product = _dbContext.Products.Find(id),
-                UnitOfMeasures = _dbContext.UnitOfMeasures.ToList()
+                UnitOfMeasures = _dbContext.UnitOfMeasures.ToList(),
+                ProductManufacturers = _dbContext.ProductManufacturers.ToList(),
+                ProductTypes = _dbContext.ProductTypes.ToList()
+
             };
 
-            return View(viewModel);
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.ProductManufacturers = _dbContext.ProductManufacturers.ToList();
-            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+                return View(viewModel);
 
-            return View(viewModel);
+           
         }
 
         [HttpPost]
@@ -97,9 +95,8 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             }
 
             viewModel.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-            ViewBag.ProductManufacturers = _dbContext.ProductManufacturers.ToList();
-            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+            viewModel.ProductManufacturers = _dbContext.ProductManufacturers.ToList();
+            viewModel.ProductTypes = _dbContext.ProductTypes.ToList();
 
             return View(viewModel);
         }

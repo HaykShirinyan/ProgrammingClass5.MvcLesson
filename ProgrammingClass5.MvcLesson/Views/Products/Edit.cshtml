@@ -47,43 +47,37 @@
         </div>
 
         <div class=" mb-3">
-            <a asp-controller="ProductColors" asp-action="Index" asp-route-productId="@Model.Id">
+            <a asp-controller="ProductColors" asp-action="Index" asp-route-productId="@Model.Product.Id">
                 Colors
             </a>
 
         </div>
 
         <div class="mb-3">
-            <a asp-controller="ProductSizes" asp-action="Index" asp-route-productId="@Model.Id">
+            <a asp-controller="ProductSizes" asp-action="Index" asp-route-productId="@Model.Product.Id">
                 Sizes
             </a>
         </div>
         <div class="mb-3">
-            <label asp-for="ProductManufacturerId" class="form-label">Product Manufacturer</label>
-            <select asp-for="ProductManufacturerId" class="form-control">
+            <label asp-for="Product.ProductManufacturerId" class="form-label">Product Manufacturer</label>
+            <select asp-for="Product.ProductManufacturerId" class="form-control">
                 <option value=""></option>
 
-                @if (ViewBag.ProductManufacturers != null)
+                @foreach (ProductManufacturer manufacturer in Model.ProductManufacturers)
                 {
-                    foreach(ProductManufacturer measure in ViewBag.ProductManufacturers as List<ProductManufacturer>)
-                    {
-                        <option value="@measure.Id">@measure.Name</option>
-                    }
+                    <option value="@manufacturer.Id">@manufacturer.Name</option>
                 }
             </select>
         </div>
 
         <div class="mb-3">
-            <label asp-for="ProductTypeId" class="form-label">Product type</label>
-            <select asp-for="ProductTypeId" class="form-control">
+            <label asp-for="Product.ProductTypeId" class="form-label">Product type</label>
+            <select asp-for="Product.ProductTypeId" class="form-control">
                 <option value=""></option>
 
-                @if (ViewBag.ProductTypes != null)
+                @foreach (ProductType type in Model.ProductTypes)
                 {
-                    foreach (ProductType measure in ViewBag.ProductTypes as List<ProductType>)
-                    {
-                        <option value="@measure.Id">@measure.Name</option>
-                    }
+                    <option value="@type.Id">@type.Name</option>
                 }
             </select>
 
