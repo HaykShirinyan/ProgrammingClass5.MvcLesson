@@ -47,9 +47,9 @@
             <select asp-for="Product.ProductManufacturer" class="form-control">
                 <option value=""></option>
 
-                @foreach (var measure in Model.ProductManufacturers)
+                @foreach (var manufacturer in Model.ProductManufacturers)
                 {
-                    <option value="@measure.Id">@measure.Name</option>
+                    <option value="@manufacturer.Id">@manufacturer.Name</option>
                 }
             </select>
         </div>
@@ -59,12 +59,9 @@
             <select asp-for="Product.ProductTypeId" class="form-control">
                 <option value=""></option>
 
-                @if (ViewBag.ProductTypes != null)
+                @foreach (var type in Model.ProductTypes)
                 {
-                    @foreach (ProductType measure in ViewBag.ProductTypes as List<ProductType>)
-                    {
-                        <option value="@measure.Id">@measure.Name</option>
-                    }
+                    <option value="@type.Id">@type.Name</option>
                 }
             </select>
 
