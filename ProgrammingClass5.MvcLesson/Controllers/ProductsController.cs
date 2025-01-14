@@ -81,7 +81,7 @@ namespace ProgrammingClass5.MvcLesson.Controllers
             ViewBag.ProductManufacturers = _dbContext.ProductManufacturers.ToList();
             ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
 
-            return View(product);
+            return View(viewModel);
         }
 
         [HttpPost]
