@@ -1,10 +1,31 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using Microsoft.EntityFrameworkCore
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject ProgrammingClass5.MvcLesson.Data.ApplicationDbContext DbContext
+
+@{
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+    var cartQuantity = await DbContext
+        .ShoppingCartProducts
+        .CountAsync(cartProduct => cartProduct.UserId == userId);
+}
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+    <li class="nav-item">
+        <a class="nav-link text-dark position-relative" asp-controller="ShoppingCart" asp-action="Index">
+            Cart
+
+            <span class="position-absolute cart-quantity start-100 translate-middle badge rounded-pill bg-danger">
+                @cartQuantity
+                <span class="visually-hidden">Cart quantity</span>
+            </span>
+        </a>
+    </li>
     <li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
     </li>

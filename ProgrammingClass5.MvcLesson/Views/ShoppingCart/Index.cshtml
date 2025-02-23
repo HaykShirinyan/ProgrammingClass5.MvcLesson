@@ -1,0 +1,36 @@
+﻿@model List<ShoppingCartProduct>
+
+<h1 class="h3">
+    Shopping Cart
+</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>UnitPrice</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var cartProduct in Model)
+        {
+            <tr>
+                <td>@cartProduct.Product.Id</td>
+                <td>@cartProduct.Product.Name</td>
+                <td>@cartProduct.Quantity</td>
+                <td>@cartProduct.Product.UnitPrice</td>
+                <td>
+                    <form asp-controller="ShoppingCart" asp-action="Delete" asp-route-productId="@cartProduct.ProductId">
+                        <button type="submit" class="btn btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

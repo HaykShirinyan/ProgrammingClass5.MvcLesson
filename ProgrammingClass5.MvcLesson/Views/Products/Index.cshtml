@@ -31,9 +31,17 @@
                         @product.UnitOfMeasure?.Name
                     </td>
                     <td>
-                        <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-secondary">
-                            Edit
-                        </a>
+                        <div class="d-flex">
+                            <form asp-controller="ShoppingCart" asp-action="Add" asp-route-productId="@product.Id" class="me-2">
+                                <button type="submit" class="btn btn-primary">
+                                    Add to Cart
+                                </button>
+                            </form>
+
+                            <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-secondary">
+                                Edit
+                            </a>
+                        </div>
                     </td>
                 </tr>
             }

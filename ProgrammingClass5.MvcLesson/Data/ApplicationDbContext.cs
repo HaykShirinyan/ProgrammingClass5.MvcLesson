@@ -10,6 +10,7 @@ namespace ProgrammingClass5.MvcLesson.Data
         public DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ShoppingCartProduct> ShoppingCartProducts { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -20,9 +21,9 @@ namespace ProgrammingClass5.MvcLesson.Data
         {
             base.OnModelCreating(builder);
 
-            users
-
             builder.Entity<ProductCategory>().HasKey(x => new { x.ProductId, x.CategoryId });
+
+            builder.Entity<ShoppingCartProduct>().HasKey(p => new { p.UserId, p.ProductId });
         }
     }
 }

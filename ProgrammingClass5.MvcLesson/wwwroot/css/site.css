@@ -20,3 +20,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.cart-quantity {
+  top: 5px;
+}
