@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProgrammingClass5.MvcLesson.Models
 {
@@ -8,11 +9,15 @@ namespace ProgrammingClass5.MvcLesson.Models
         public int Id { get; set; }
 
         [Required]
+        
 
         public decimal Length { get; set; }
         [Required]
+       
         public decimal Height { get; set; }
+
         [Required]
+    
         public decimal Width { get; set; }
 
 

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ProgrammingClass5.MvcLesson.Models.ShoppingCart>
+
+<h2>Your Shopping Cart</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Quantity</td>
+                <td>
+                    <a asp-action="RemoveFromCart" asp-route-id="@item.Id" class="btn btn-danger">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Checkout" class="btn btn-success">Checkout</a>
+
+

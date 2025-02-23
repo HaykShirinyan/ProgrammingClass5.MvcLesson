@@ -45,6 +45,18 @@
                             Edit
                         </a>
                     </td>
+
+                    <td>
+                        <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-productId="@product.Id"
+                           class="btn btn-primary" style="width: 200px;">
+                             Add to Cart
+                        </a>
+
+
+                    </td>
+                   
+
+
                 </tr>
             }
         </tbody>

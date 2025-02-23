@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClass5.MvcLesson.Models;
+using System.Reflection.Emit;
 
 namespace ProgrammingClass5.MvcLesson.Data
 {
@@ -17,7 +18,11 @@ namespace ProgrammingClass5.MvcLesson.Data
         public DbSet<ProductColor> ProductColors { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<ProductSize> ProductSizes { get; set; }
-      
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+       
+
+
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -34,7 +39,38 @@ namespace ProgrammingClass5.MvcLesson.Data
                                                
             builder.Entity<ProductColor>().HasKey(x => new { x.ProductId, x.ColorId });
                        
-            builder.Entity<ProductSize>().HasKey(x => new { x.ProductId, x.SizeId });   
+            builder.Entity<ProductSize>().HasKey(x => new { x.ProductId, x.SizeId });
+
+
+            // For UnitPrice property in Product entity
+            builder.Entity<Product>()
+                .Property(p => p.UnitPrice)
+                .HasColumnType("decimal(18,2)");
+
+            // For Width property in Size entity
+           builder.Entity<Size>()
+                .Property(s => s.Width)
+                .HasColumnType("decimal(18,2)");
+
+            // For Length property in Size entity
+           builder.Entity<Size>()
+                .Property(s => s.Length)
+                .HasColumnType("decimal(18,2)");
+
+            // For Height property in Size entity
+            builder.Entity<Size>()
+                .Property(s => s.Height)
+                .HasColumnType("decimal(18,2)");
+
+
+
+
+
+
+
+
+
+
         }
     }
 
